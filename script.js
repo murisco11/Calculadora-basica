@@ -13,17 +13,24 @@ this.inicia = function() {
 this.cliqueNumeros = function () {
 
 }
+this.simbolos = ['(', ')', '+', '-', '*', '/', '.']
 
 this.cliqueTeclas = function () {
     document.addEventListener('keydown', event => {
-        const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/'];
+        const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
         this.display.focus();
 
         const teclaPressionada = event.key;
 
         if (numeros.includes(teclaPressionada)) {
             this.display.value += teclaPressionada;
-        } else if (event.keyCode === 8) {
+            simbolos = ['(', ')', '+', '-', '*', '/','.']
+        } 
+        if (simbolos.includes(teclaPressionada)){
+            this.display.value += teclaPressionada
+            simbolos = ['', '', '', '', '', '', '']
+        }else if (event.keyCode === 8) {
             event.preventDefault(); 
             this.deletarUltimo();
         } else if (event.keyCode === 13) {
