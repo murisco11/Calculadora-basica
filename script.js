@@ -13,28 +13,34 @@ this.inicia = function() {
 this.cliqueNumeros = function () {
 
 }
-this.simbolos = ['(', ')', '+', '-', '*', '/', '.']
+this.simbolos = ['(', ')', '+', '-', '*', '/']
+this.ponto = ['.']
 
 this.cliqueTeclas = function () {
     document.addEventListener('keydown', event => {
-        const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-        this.display.focus();
+        this.display.focus()
 
-        const teclaPressionada = event.key;
+        const teclaPressionada = event.key
 
         if (numeros.includes(teclaPressionada)) {
             this.display.value += teclaPressionada;
-            simbolos = ['(', ')', '+', '-', '*', '/','.']
+            simbolos = ['(', ')', '+', '-', '*', '/']
+        } 
+        if (this.ponto.includes(teclaPressionada)) {
+            this.display.value += teclaPressionada;
+            this.ponto = ['']
         } 
         if (simbolos.includes(teclaPressionada)){
             this.display.value += teclaPressionada
-            simbolos = ['', '', '', '', '', '', '']
+            simbolos = ['', '', '', '', '', '']
+            this.ponto = ['.']
         }else if (event.keyCode === 8) {
-            event.preventDefault(); 
-            this.deletarUltimo();
+            event.preventDefault()
+            this.deletarUltimo()
         } else if (event.keyCode === 13) {
-            this.resolverConta();
+            this.resolverConta()
         }
     });
 };
@@ -69,6 +75,7 @@ this.limparDisplay = () => {
 
 this.deletarUltimo = () => {
     this.display.value = this.display.value.slice(0, -1)
+    simbolos = ['(', ')', '+', '-', '*', '/']
 }
 
 this.resolverConta = () => {
@@ -83,7 +90,7 @@ this.resolverConta = () => {
         return
     }
     if (resultado !== null) {
-        this.display.value = resultado;
+        this.display.value = resultado.toFixed(10)
     }
 }
 }
